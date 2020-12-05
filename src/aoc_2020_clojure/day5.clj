@@ -14,8 +14,8 @@
     lb
     (let [r (/ (inc (- ub lb)) 2)]
       (cond
-        ((set '("F" "L")) f) (parse-seat rest lb (- ub r))
-        ((set '("B" "R")) f) (parse-seat rest (+ lb r) ub)))))
+        ((set '("F" "L")) f) (recur rest lb (- ub r))
+        ((set '("B" "R")) f) (recur rest (+ lb r) ub)))))
 
 (defn seat-number [code]
   (let [s (str/split code #"")]

@@ -12,7 +12,7 @@
 
 (defn traverse [grid x y dx dy trees]
   (if (>= y (count grid))
-    trees (traverse grid (+ x dx) (+ y dy) dx dy (+ trees (if (is-tree grid x y) 1 0)))))
+    trees (recur grid (+ x dx) (+ y dy) dx dy (+ trees (if (is-tree grid x y) 1 0)))))
 ; part 1
 
 (with-file "data/input_d3"

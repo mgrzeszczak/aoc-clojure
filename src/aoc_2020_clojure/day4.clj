@@ -16,8 +16,8 @@
   (if (not l)
     (if (empty? current) all (cons (str/join " " current) all))
     (if (= "" l)
-      (split-passports-r lines '() (cons (str/join " " current) all))
-      (split-passports-r lines (cons l current) all))))
+      (recur lines '() (cons (str/join " " current) all))
+      (recur lines (cons l current) all))))
 
 (defn split-passports [lines] (split-passports-r lines '() '()))
 
@@ -74,7 +74,7 @@
         "ecl" (validate-ecl val)
         "pid" (validate-pid val)
         true)
-      (valid-passport-p2-r rest))))
+      (recur rest))))
 
 (defn valid-passport-p2 [p]
   (and (valid-passport-p1 (set (map first p)))
