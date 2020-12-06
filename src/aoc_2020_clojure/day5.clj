@@ -23,11 +23,12 @@
        (parse-seat (take-last 3 s) 0 7))))
 
 ; part 1
-(with-file "data/input_d5"
-           (fn [lines]
-             (->> (do lines)
-                  (map seat-number)
-                  (reduce max))))
+(time (with-file "data/input_d5"
+                 (fn [lines]
+                   (->> (do lines)
+                        (map seat-number)
+                        (reduce max)))))
+
 
 ; part 2
 (with-file "data/input_d5"
