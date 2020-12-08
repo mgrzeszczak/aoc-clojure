@@ -10,35 +10,38 @@
         rest (re-seq #"(\d+) (\w+) (\w+) bags?" line)]
     (list (str a b) (map (comp parse-content #(drop 1 %)) rest))))
 
+(defn prepare-data [file]
+  (as-> (slurp file) x
+        (str/split x #"\n")
+        (map parse-line x)))
 
-(defn can-contain-r? [start target data]
+; part 1
+(defn can-contain-r? [fn start target data]
   (if (= start target)
     true
     (if (empty? (data start))
       false
-      (some identity (map #(can-contain-r? (second %) target data) (data start))))))
-(def can-contain? (memoize can-contain-r?))
+      (some identity (map #(fn fn (second %) target data) (data start))))))
+
+(def can-contain?
+  (let [memfn (memoize can-contain-r?)]
+    (partial memfn memfn)))
 
 (defn solve-p1 [data]
-  (let [ks (filter #(not= "shinygold" %)(keys data))]
+  (let [ks (filter #(not= "shinygold" %) (keys data))]
     (filter #(can-contain? % "shinygold" data) ks)))
-; part 1
-(as-> (slurp "data/input_d7") x
-      (str/split x #"\n")
-      (map parse-line x)
-      (into {} (map vec x))
-      (solve-p1 x)
-      (count x))
+
+(time (as-> (prepare-data "data/input_d7") x
+            (into {} (map vec x))
+            (solve-p1 x)
+            (count x)))
 
 
 ; part 2
-
 (defn solve-p2 [current data]
   (let [bags (data current)]
     (inc (reduce + (map #(* (first %) (solve-p2 (second %) data)) bags)))))
 
-(as-> (slurp "data/input_d7") x
-      (str/split x #"\n")
-      (map parse-line x)
+(as-> (prepare-data "data/input_d7") x
       (into {} (map vec x))
       (dec (solve-p2 "shinygold" x)))
