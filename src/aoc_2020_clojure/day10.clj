@@ -14,7 +14,7 @@
             (* (count (filter #(= % 3) x)) (count (filter #(= % 1) x)))))
 
 ; part 2
-(defn solve-p2 [data]
+(defn solve-p2-old [data]
   (let [fn (fn [self pos skipped data]
              (if (>= pos (count data))
                1
@@ -32,6 +32,11 @@
         memfn (memoize fn)]
     (memfn memfn 1 0 data)))
 
+(defn solve-p2
+  ([data paths index] (let [v (data index)
+                            r (range 3)]
+                        (assoc paths v (apply + (map #(paths (- v (inc %)) 0) r))))))
+
 (time (as-> (slurp "data/input_d10") x
             (str/split-lines x)
             (map #(Long/parseLong %) x)
@@ -39,8 +44,8 @@
             (conj x (+ (apply max x) 3))
             (sort x)
             (vec x)
-            (solve-p2 x)
-            ))
+            ((reduce
+               (partial solve-p2 x) {0 1} (drop 1 (range (count x)))) (last x))))
 
 
 
