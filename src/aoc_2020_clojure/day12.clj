@@ -21,23 +21,13 @@
 (defn manhattan-dist [p1 p2]
   (reduce + (map #(Math/abs (- %1 %2)) p1 p2)))
 
-(defn rotate-x [[x y] dir]
-  (case dir
-    "L" [0 (- x)]
-    "R" [0 x])
-  )
-
-(defn rotate-y [[x y] dir]
-  (case dir
-    "L" [y 0]
-    "R" [(- y) 0])
-  )
-
 (defn rotate-waypoint [[wx wy] dir deg]
   (if (= deg 0)
     [wx wy]
     (rotate-waypoint
-      (vec (map + (rotate-x [wx wy] dir) (rotate-y [wx wy] dir)))
+      (case dir
+        "L" [wy (- wx)]
+        "R" [(- wy) wx])
       dir
       (- deg 90))))
 
