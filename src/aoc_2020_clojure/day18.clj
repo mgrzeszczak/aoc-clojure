@@ -14,56 +14,57 @@
         (map parse-line x)))
 
 ; part 1
-(defn calculate [expr startIndex]
-  (loop [i startIndex
-         op nil
-         curr nil]
-    (if (>= i (count expr))
-      (list curr i)
-      (let [symbol (expr i)]
-        (case symbol
-          "(" (let [[v ind] (calculate expr (inc i))]
-                (recur ind nil
-                       (case op "*" (* curr v) "+" (+ curr v) v))
-                )
-          ")" (list curr (inc i))
-          "+" (recur (inc i) "+" curr)
-          "*" (recur (inc i) "*" curr)
-          (recur (inc i) nil (case op "*" (* curr symbol) "+" (+ curr symbol) symbol)))))))
+(defn calc-number-p1 [input i]
+  (let [token (input i)]
+    (if (= token "(")
+      (let [[exp ni] (calc-expression-p1 input (inc i))]
+        (list exp (inc ni)))
+      (list token (inc i)))))
+
+(defn calc-expression-p1 [input i]
+  (let [[term ni] (calc-number-p1 input i)]
+    (loop [value term
+           pos ni]
+      (if (>= pos (count input))
+        (list value pos)
+        (let [token (input pos)]
+          (if (#{"*" "+"} token)
+            (let [[termValue newIndex] (calc-number-p1 input (inc pos))]
+              (recur (if (= token "*") (* value termValue) (+ value termValue)) newIndex))
+            (list value pos)))))))
 
 (time (as-> (parse-input "data/input_d18") x
-            (reduce + (map #(first (calculate % 0)) x))))
+            (reduce + (map #(first (calc-expression-p1 % 0)) x))))
 
 ; part 2
-
-(defn calc-term [input i]
-  (let [[number ni] (calc-number input i)]
+(defn calc-term-p2 [input i]
+  (let [[number ni] (calc-number-p2 input i)]
     (loop [value number
            pos ni]
       (if (>= pos (count input))
         (list value pos)
         (let [token (input pos)]
           (if (= token "+")
-            (let [[numberValue newIndex] (calc-number input (inc pos))]
+            (let [[numberValue newIndex] (calc-number-p2 input (inc pos))]
               (recur (+ numberValue value) newIndex))
             (list value pos)))))))
 
-(defn calc-number [input i]
+(defn calc-number-p2 [input i]
   (let [token (input i)]
     (if (= token "(")
-      (let [[exp ni] (calc-expression input (inc i))]
+      (let [[exp ni] (calc-expression-p2 input (inc i))]
         (list exp (inc ni)))
       (list token (inc i)))))
 
-(defn calc-expression [input i]
-  (let [[term ni] (calc-term input i)]
+(defn calc-expression-p2 [input i]
+  (let [[term ni] (calc-term-p2 input i)]
     (loop [value term
            pos ni]
       (if (>= pos (count input))
         (list value pos)
         (let [token (input pos)]
           (if (= token "*")
-            (let [[termValue newIndex] (calc-term input (inc pos))]
+            (let [[termValue newIndex] (calc-term-p2 input (inc pos))]
               (recur (* value termValue) newIndex))
             (list value pos)))))))
 
