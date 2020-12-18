@@ -2,11 +2,16 @@
   (:require [clojure.string :as str]
             [clojure.set :as set]))
 
+(def ops {"*" * "+" +})
+(def symbols #{"*" "(" ")" "+"})
+
 (defn parse-line [line]
-  (as-> line x
-        (filter #(not= " " %) (str/split x #""))
-        (map #(if (re-matches #"\d+" %) (Integer/parseInt %) %) x)
-        (vec x)))
+  (let [m (re-matcher #"\d+|\*|\+|\(|\)" line)]
+    (loop [tokens '()]
+      (let [match (re-find m)]
+        (if (nil? match)
+          (vec (map #(if (not (symbols %)) (Integer/parseInt %) %) (reverse tokens)))
+          (recur (conj tokens match)))))))
 
 (defn parse-input [file]
   (as-> (slurp file) x
@@ -28,9 +33,9 @@
       (if (>= pos (count input))
         (list value pos)
         (let [token (input pos)]
-          (if (#{"*" "+"} token)
+          (if (ops token)
             (let [[termValue newIndex] (calc-number-p1 input (inc pos))]
-              (recur (if (= token "*") (* value termValue) (+ value termValue)) newIndex))
+              (recur ((ops token) value termValue) newIndex))
             (list value pos)))))))
 
 (time (as-> (parse-input "data/input_d18") x
