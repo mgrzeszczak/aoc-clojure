@@ -1,4 +1,4 @@
-(ns aoc-2020-clojure.day22
+(ns aoc-2020-clojure.day24
   (:require [clojure.string :as str]
             [clojure.set :as set]))
 
@@ -10,4 +10,4 @@
         (str/split-lines x)
         (map parse-line x)))
 
-(time (as-> (parse-input "data/input_d22") x))
+(time (as-> (parse-input "data/input_d24") x))
