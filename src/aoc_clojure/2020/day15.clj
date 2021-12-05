@@ -1,4 +1,4 @@
-(ns aoc-2020-clojure.day15
+(ns aoc-clojure.2020.day15
   (:require [clojure.string :as str]))
 
 (def input [0, 5, 4, 1, 10, 14, 7])

@@ -1,4 +1,4 @@
-(ns aoc-2020-clojure.day12
+(ns aoc-clojure.2020.day12
   (:require [clojure.string :as str]))
 
 (defn parse-data [inp]

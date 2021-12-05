@@ -1,4 +1,4 @@
-(ns aoc-2020-clojure.day11
+(ns aoc-clojure.2020.day11
   (:require [clojure.string :as str]))
 
 (defn to-index [[x y] w]

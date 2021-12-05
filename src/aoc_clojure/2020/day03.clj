@@ -1,4 +1,4 @@
-(ns aoc-2020-clojure.day3)
+(ns aoc-clojure.2020.day03)
 (use 'clojure.java.io)
 
 (defn str2char [s] (first (char-array s)))

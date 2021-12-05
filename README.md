@@ -1,3 +1,3 @@
-# aoc-2020-clojure
+# aoc-clojure
 
-Advent of code 2020 solutions in Clojure.
+Advent of code solutions in Clojure.

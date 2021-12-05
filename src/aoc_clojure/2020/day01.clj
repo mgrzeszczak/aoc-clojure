@@ -1,4 +1,4 @@
-(ns aoc-2020-clojure.day1)
+(ns aoc-clojure.2020.day01)
 (use 'clojure.java.io)
 
 

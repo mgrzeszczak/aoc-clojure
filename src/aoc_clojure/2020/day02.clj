@@ -1,4 +1,4 @@
-(ns aoc-2020-clojure.day2)
+(ns aoc-clojure.2020.day02)
 (use 'clojure.java.io)
 
 (defn with-file [fname fn]

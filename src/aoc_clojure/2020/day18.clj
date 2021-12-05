@@ -1,4 +1,4 @@
-(ns aoc-2020-clojure.day18
+(ns aoc-clojure.2020.day18
   (:require [clojure.string :as str]
             [clojure.set :as set]))
 
