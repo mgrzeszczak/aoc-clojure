@@ -101,7 +101,7 @@
     (filter (fn [id] (= 2 (count (filter #(= (second %) id) mappings)))) ids)))
 
 ; part 1
-(time (as-> (parse-input "data/input_d20") x
+(time (as-> (parse-input "data/2020/input_d20") x
             (solve-puzzle x)
             (reduce * (find-corners (second x)))))
 
@@ -165,7 +165,7 @@
   [(+ (first pos) (first offset)) (+ (second pos) (second offset))])
 
 (defn find-monsters [data n]
-  (let [pattern (load-monster-pattern "data/input_d20_monster")]
+  (let [pattern (load-monster-pattern "data/2020/input_d20_monster")]
     (let [all-positions (reduce concat (map
                                          (fn [i] (map
                                                    (fn [j] [i j])
@@ -174,9 +174,9 @@
           hash-positions (filter #(= "#" (data %)) all-positions)]
       (count (filter (fn [pos] (every? #(= % "#") (map data (map #(apply-offset pos %) pattern)))) hash-positions)))))
 
-(count (filter #(= "#" %) (str/split (slurp "data/input_d20") #"")))
+(count (filter #(= "#" %) (str/split (slurp "data/2020/input_d20") #"")))
 
-(time (as-> (parse-input "data/input_d20") x
+(time (as-> (parse-input "data/2020/input_d20") x
             (solve-puzzle x)
             (make-image x)
             (- (count (filter #(= % "#") (vals (:data x)))) (* 15 (reduce max (map #(find-monsters (:data %) (:n x)) (generate-orientations x (:n x))))))))

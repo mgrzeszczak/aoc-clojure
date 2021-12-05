@@ -20,5 +20,5 @@
 (defn solve [[v1 v2]]
   (transform v2 (crack v1)))
 
-(time (as-> (parse-input "data/input_d25") x
+(time (as-> (parse-input "data/2020/input_d25") x
             (solve x)))

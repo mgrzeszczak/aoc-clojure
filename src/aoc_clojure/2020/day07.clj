@@ -31,7 +31,7 @@
   (let [ks (filter #(not= "shinygold" %) (keys data))]
     (filter #(can-contain? % "shinygold" data) ks)))
 
-(time (as-> (prepare-data "data/input_d7") x
+(time (as-> (prepare-data "data/2020/input_d07") x
             (into {} (map vec x))
             (solve-p1 x)
             (count x)))
@@ -42,6 +42,6 @@
   (let [bags (data current)]
     (inc (reduce + (map #(* (first %) (solve-p2 (second %) data)) bags)))))
 
-(as-> (prepare-data "data/input_d7") x
+(as-> (prepare-data "data/2020/input_d07") x
       (into {} (map vec x))
       (dec (solve-p2 "shinygold" x)))

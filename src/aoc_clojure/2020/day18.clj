@@ -38,7 +38,7 @@
               (recur ((ops token) value termValue) newIndex))
             (list value pos)))))))
 
-(time (as-> (parse-input "data/input_d18") x
+(time (as-> (parse-input "data/2020/input_d18") x
             (reduce + (map #(first (calc-expression-p1 % 0)) x))))
 
 ; part 2
@@ -73,5 +73,5 @@
               (recur (* value termValue) newIndex))
             (list value pos)))))))
 
-(time (as-> (parse-input "data/input_d18") x
+(time (as-> (parse-input "data/2020/input_d18") x
             (reduce + (map #(first (calc-expression % 0)) x))))

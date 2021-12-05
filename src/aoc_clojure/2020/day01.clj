@@ -9,7 +9,7 @@
 (defn p1 []
   (let [nums (map
                (fn [x] (Integer/parseInt x))
-               (get-lines "data/input_d1"))]
+               (get-lines "data/2020/input_d01"))]
     (map second
          (filter
            #(= (first %) 2020)
@@ -18,7 +18,7 @@
 (defn p2 []
   (let [nums (map
                (fn [x] (Integer/parseInt x))
-               (get-lines "data/input_d1"))]
+               (get-lines "data/2020/input_d01"))]
     (map second
          (filter
            #(= (first %) 2020)

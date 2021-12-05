@@ -81,7 +81,7 @@
      )
    ))
 
-(time (as-> (parse-input "data/input_d19") x
+(time (as-> (parse-input "data/2020/input_d19") x
             {
              :pattern  (re-pattern (build-regular-exp (:rules x)))
              :messages (:messages x)
@@ -89,7 +89,7 @@
             (count (filter #(re-matches (:pattern x) %) (:messages x)))))
 
 ; part 2
-(time (as-> (parse-input "data/input_d19") x
+(time (as-> (parse-input "data/2020/input_d19") x
             {
              :pattern  (re-pattern (build-regular-exp-p2 (:rules x)))
              :messages (:messages x)

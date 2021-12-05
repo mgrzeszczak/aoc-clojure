@@ -15,13 +15,13 @@
     trees (recur grid (+ x dx) (+ y dy) dx dy (+ trees (if (is-tree grid x y) 1 0)))))
 ; part 1
 
-(with-file "data/input_d3"
+(with-file "data/2020/input_d03"
            (fn [lines]
              (let [grid (doall lines)]
                (traverse grid 0 0 3 1 0))))
 
 ; part 2
-(with-file "data/input_d3"
+(with-file "data/2020/input_d03"
            (fn [lines]
              (let [grid (doall lines)]
                (->> (list '(1 1) '(3 1) '(5 1) '(7 1) '(1 2))

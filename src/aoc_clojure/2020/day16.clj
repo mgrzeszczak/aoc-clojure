@@ -33,7 +33,7 @@
            })))
 
 ; part 1
-(time (as-> (parse-input "data/input_d16") x
+(time (as-> (parse-input "data/2020/input_d16") x
             (reduce + (filter (comp not (:any-rule x)) (flatten (:nearby-tickets x))))))
 
 ; part 2
@@ -57,7 +57,7 @@
               new-remaining-rules (filter #(nil? (matched-rule-names (:name %))) remaining-rules)]
           (recur new-found-matches new-found-indices new-remaining-rules))))))
 
-(time (as-> (parse-input "data/input_d16") x
+(time (as-> (parse-input "data/2020/input_d16") x
             (assoc x :valid-tickets (filter #(every? (:any-rule x) %) (:nearby-tickets x)))
             (let [mappings (part2 (:valid-tickets x) (:rules x))
                   departure-indices (map second (filter #(str/starts-with? (first %) "departure") mappings))

@@ -37,7 +37,7 @@
        (< nSum target) (recur (inc currentPosition) startPos nSum target data)
        (> nSum target) (recur currentPosition (inc startPos) (- sum (data startPos)) target data)))))
 
-(time (as-> (slurp "data/input_d9") x
+(time (as-> (slurp "data/2020/input_d09") x
             (str/split-lines x)
             (map #(Long/parseLong %) x)
             (vec x)

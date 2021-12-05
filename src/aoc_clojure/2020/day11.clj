@@ -61,7 +61,7 @@
 (defn prepare-data [x maxJumps]
   (assoc x :visible-seats (cache-visible-seats x maxJumps)))
 
-(time (as-> (slurp "data/input_d11") x
+(time (as-> (slurp "data/2020/input_d11") x
             (parse-data x)
             (map #(list (first %) (as-> (prepare-data x (:maxJumps (second %))) x
                                         (solve (:data x) (:width x) (:visible-seats x) (:occupiedLimit (second %))))) parts)))

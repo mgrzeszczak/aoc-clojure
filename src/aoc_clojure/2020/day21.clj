@@ -40,7 +40,7 @@
        :part2 (str/join "," (map solved-allergens (sort (keys solved-allergens))))
        })))
 
-(time (as-> (parse-input "data/input_d21") x
+(time (as-> (parse-input "data/2020/input_d21") x
             {
              :data            x
              :all-ingredients (reduce set/union (map :ingredients x))

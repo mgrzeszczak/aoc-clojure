@@ -52,10 +52,10 @@
             new-black-tiles (into #{} (filter #(= :black (day-color % black-tiles)) tiles-with-neighbors))]
         (recur (inc day) new-black-tiles)))))
 
-(time (as-> (parse-input "data/input_d24") x
+(time (as-> (parse-input "data/2020/input_d24") x
             (solve x)
             (count (filter #(= % :black) (vals x)))))
 
-(time (as-> (parse-input "data/input_d24") x
+(time (as-> (parse-input "data/2020/input_d24") x
             (solve x)
             (game-of-life x 100)))

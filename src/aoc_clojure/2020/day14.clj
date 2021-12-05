@@ -36,7 +36,7 @@
     )
   )
 
-(time (as-> (slurp "data/input_d14") x
+(time (as-> (slurp "data/2020/input_d14") x
             (parse-data x)
             (solve-p1 x)
             ))
@@ -77,7 +77,7 @@
       )
     )
   )
-(time (as-> (slurp "data/input_d14") x
+(time (as-> (slurp "data/2020/input_d14") x
             (parse-data x)
             (solve-p2 x)
             ))

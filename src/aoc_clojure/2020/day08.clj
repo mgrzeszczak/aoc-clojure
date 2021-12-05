@@ -14,7 +14,7 @@
         "jmp" (solve-p1 (+ pos v) acc (conj visited pos) instr)
         "acc" (solve-p1 (inc pos) (+ acc v) (conj visited pos) instr)))))
 
-(time (as-> (slurp "data/input_d8") x
+(time (as-> (slurp "data/2020/input_d08") x
             (str/split-lines x)
             (map #(re-matches #"(acc|jmp|nop) ([+-]\d+)" %) x)
             (map #(list (second %) (Integer/parseInt (nth % 2))) x)
@@ -40,7 +40,7 @@
           (recur (inc p) instr)))
       (recur (inc p) instr))))
 
-(time (as-> (slurp "data/input_d8") x
+(time (as-> (slurp "data/2020/input_d08") x
             (str/split-lines x)
             (map #(re-matches #"(acc|jmp|nop) ([+-]\d+)" %) x)
             (map #(list (second %) (Integer/parseInt (nth % 2))) x)

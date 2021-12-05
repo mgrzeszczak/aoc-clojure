@@ -23,7 +23,7 @@
        (parse-seat (take-last 3 s) 0 7))))
 
 ; part 1
-(time (with-file "data/input_d5"
+(time (with-file "data/2020/input_d05"
                  (fn [lines]
                    (->> (do lines)
                         (map seat-number)
@@ -31,7 +31,7 @@
 
 
 ; part 2
-(with-file "data/input_d5"
+(with-file "data/2020/input_d05"
            (fn [lines]
              (let [s (set (->> (do lines)
                                (map seat-number)))

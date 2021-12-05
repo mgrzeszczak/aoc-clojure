@@ -26,7 +26,7 @@
   (let [required (set '("byr" "iyr" "eyr" "hgt" "hcl" "ecl" "pid"))]
     (empty? (set/difference required p))))
 
-(with-file "data/input_d4"
+(with-file "data/2020/input_d4"
            #(->> (do (split-passports %))
                  (map fields)
                  (map (fn [x] (set (map first x))))
@@ -80,7 +80,7 @@
   (and (valid-passport-p1 (set (map first p)))
        (valid-passport-p2-r p)))
 
-(with-file "data/input_d4"
+(with-file "data/2020/input_d4"
            #(->> (do (split-passports %))
                  (map fields)
                  (filter valid-passport-p2)

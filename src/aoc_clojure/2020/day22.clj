@@ -22,7 +22,7 @@
         (recur (concat rest1 [top1 top2]) rest2)
         (recur rest1 (concat rest2 [top2 top1]))))))
 
-(time (as-> (parse-input "data/input_d22") x
+(time (as-> (parse-input "data/2020/input_d22") x
             (solve-p1 (first x) (second x))
             (reduce + (map-indexed #(* (inc %1) %2) (reverse x)))))
 
@@ -49,7 +49,7 @@
               (recur (concat rest1 [top1 top2]) rest2 new-history)
               (recur rest1 (concat rest2 [top2 top1]) new-history))))))))
 
-(time (as-> (parse-input "data/input_d22") x
+(time (as-> (parse-input "data/2020/input_d22") x
             (solve-p2 (first x) (second x))
             (second x)
             (reduce + (map-indexed #(* (inc %1) %2) (reverse x)))))

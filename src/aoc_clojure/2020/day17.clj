@@ -50,7 +50,7 @@
 
 ; part 1
 
-(time (as-> (parse-input "data/input_d17") x
+(time (as-> (parse-input "data/2020/input_d17") x
             (solve x 6)
             (count x)))
 
@@ -108,6 +108,6 @@
 
 ; part 1
 
-(time (as-> (parse-input-p2 "data/input_d17") x
+(time (as-> (parse-input-p2 "data/2020/input_d17") x
             (solve-p2 x 6)
             (count x)))

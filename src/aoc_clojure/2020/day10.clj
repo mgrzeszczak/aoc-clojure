@@ -4,7 +4,7 @@
   (:require [clojure.string :as str]))
 
 ; part 1
-(time (as-> (slurp "data/input_d10") x
+(time (as-> (slurp "data/2020/input_d10") x
             (str/split-lines x)
             (map #(Long/parseLong %) x)
             (conj x 0)
@@ -37,7 +37,7 @@
                             r (range 3)]
                         (assoc paths v (apply + (map #(paths (- v (inc %)) 0) r))))))
 
-(time (as-> (slurp "data/input_d10") x
+(time (as-> (slurp "data/2020/input_d10") x
             (str/split-lines x)
             (map #(Long/parseLong %) x)
             (conj x 0)

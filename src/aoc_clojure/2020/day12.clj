@@ -57,7 +57,7 @@
           "R" (recur [x y] (rotate-waypoint [wx wy] instr n) (inc ind))
           (recur [x y] (move [wx wy] instr n) (inc ind)))))))
 
-(time (as-> (slurp "data/input_d12") x
+(time (as-> (slurp "data/2020/input_d12") x
             (parse-data x)
             (vec x)
             (vector (solve-p1 x) (solve-p2 x))))

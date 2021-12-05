@@ -6,7 +6,7 @@
     (do (fn (line-seq r)))))
 
 ; part 1
-(with-file "data/input_d2"
+(with-file "data/2020/input_d02"
            (fn [lines]
              (->> (do lines)
                   (map #(re-matches #"(\d+)-(\d+) (\w): (\w+)" %))
@@ -19,7 +19,7 @@
 
 ; part 2
 (defn str2char [s] (first (char-array s)))
-(with-file "data/input_d2"
+(with-file "data/2020/input_d02"
            (fn [lines]
              (->> (do lines)
                   (map #(re-matches #"(\d+)-(\d+) (\w): (\w+)" %))

@@ -2,7 +2,7 @@
   (:require [clojure.string :as str]))
 
 ; part 1
-(time (as-> (slurp "data/input_d13") x
+(time (as-> (slurp "data/2020/input_d13") x
             (str/split-lines x)
             (list (Integer/parseInt (first x)) (map #(Integer/parseInt %) (map first (re-seq #"(\d+)" (second x)))))
             (map #(hash-map :rem (- % (mod (first x) %)) :mod (mod (first x) %) :bus %) (second x))
@@ -21,7 +21,7 @@
           (recur (drop 1 all) current (* step currentStep))
           (recur all (+ current currentStep) currentStep))))))
 
-(time (as-> (slurp "data/input_d13") x
+(time (as-> (slurp "data/2020/input_d13") x
             (str/split-lines x)
             (filter #(not= (second %) "x") (map-indexed #(vector %1 %2) (str/split (second x) #",")))
             (map #(vector (first %) (Integer/parseInt (second %))) x)
