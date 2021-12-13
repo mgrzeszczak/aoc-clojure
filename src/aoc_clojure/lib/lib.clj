@@ -2,6 +2,14 @@
 
 (defn abs [n] (max n (-' n)))
 
+(defn print-points [points]
+  (let [max-x (apply max (map first points))
+        max-y (apply max (map second points))]
+    (dotimes [y (inc max-y)]
+      (dotimes [x (inc max-x)]
+        (print (if (points [x y]) "#" " ")))
+      (println))))
+
 (defn print-grid [grid]
   (let [max-x (apply max (map ffirst grid))
         max-y (apply max (map #(second (first %)) grid))]
