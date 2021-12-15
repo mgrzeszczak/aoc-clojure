@@ -1,4 +1,5 @@
 (ns aoc-clojure.lib.lib)
+(require '[clojure.data.priority-map :refer [priority-map]])
 
 (defn abs [n] (max n (-' n)))
 
@@ -35,3 +36,17 @@
         dy [-1 0 1]
         :when (not (and (= dx 0) (= dy 0)))]
     [(+ x dx) (+ y dy)]))
+
+(defn shortest-path ([from to grid heuristic-fn]
+                     (loop [q (priority-map from (heuristic-fn from to))
+                            g {from 0}]
+                       (if (empty? q)
+                         nil
+                         (let [[current v] (peek q)]
+                           (if (= current to)
+                             v
+                             (let [ns (filter grid (grid-neighbors-4 current))
+                                   to-update (filter (fn [[p score]] (< score (or (g p) ##Inf))) (map (fn [p] [p (+ (g current) (grid p))]) ns))
+                                   new-g (into g to-update)
+                                   new-q (into (pop q) (map (fn [[p score]] [p (+ score (heuristic-fn p to))]) to-update))]
+                               (recur new-q new-g))))))))
