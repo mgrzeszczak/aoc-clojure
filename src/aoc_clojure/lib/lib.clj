@@ -11,13 +11,26 @@
         (print (if (points [x y]) "#" " ")))
       (println))))
 
-(defn print-grid [grid]
-  (let [max-x (apply max (map ffirst grid))
-        max-y (apply max (map #(second (first %)) grid))]
-    (dotimes [x (inc max-x)]
-      (dotimes [y (inc max-y)]
-        (print (format "%3d" (grid [x y]))))
-      (println))))
+(defn grid-size [grid]
+  (let [xs (map first (keys grid))
+        ys (map second (keys grid))
+        x-min (reduce min xs)
+        x-max (reduce max xs)
+        y-min (reduce min ys)
+        y-max (reduce max ys)]
+    [x-min x-max y-min y-max]))
+
+(defn print-grid[grid]
+  (let [[x-min x-max y-min y-max] (grid-size grid)]
+    (dotimes [dy (inc (- y-max y-min))]
+      (dotimes [dx (inc (- x-max x-min))]
+        (print (format "%3s" (grid [(+ x-min dx) (+ y-min dy)])))
+        )
+      (println)
+      )
+    )
+  )
+
 
 (defn parse-grid
   ([lines]
