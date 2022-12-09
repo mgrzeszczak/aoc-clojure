@@ -24,7 +24,7 @@
   (let [[x-min x-max y-min y-max] (grid-size grid)]
     (dotimes [dy (inc (- y-max y-min))]
       (dotimes [dx (inc (- x-max x-min))]
-        (print (format "%3s" (grid [(+ x-min dx) (+ y-min dy)])))
+        (print (format "%3s" (or (grid [(+ x-min dx) (+ y-min dy)]) "")))
         )
       (println)
       )
@@ -37,6 +37,12 @@
    (into {} (reduce concat (map-indexed (fn [row line] (map-indexed #(vector [row %1] (str %2)) line)) lines))))
   ([lines value-fn]
    (into {} (reduce concat (map-indexed (fn [row line] (map-indexed #(vector [row %1] (value-fn (str %2))) line)) lines)))))
+
+(defn parse-grid-2
+  ([lines]
+   (parse-grid-2 lines identity))
+  ([lines value-fn]
+   (into {} (reduce concat (map-indexed (fn [row line] (map-indexed #(vector [%1 row] (value-fn (str %2))) line)) lines)))))
 
 (defn grid-neighbors-4 [[x y]]
   (for [dx [-1 0 1]
@@ -63,3 +69,16 @@
                                    new-g (into g to-update)
                                    new-q (into (pop q) (map (fn [[p score]] [p (+ score (heuristic-fn p to))]) to-update))]
                                (recur new-q new-g))))))))
+
+(defn dijkstra
+  [start neighbor-fn]
+  (loop [queue (priority-map start 0)
+         cost-map {start 0}]
+    (if (empty? queue)
+      cost-map
+      (let [[current cost] (peek queue)]
+        (let [ns (neighbor-fn current)
+              to-update (filter (fn [[n d]] (< d (or (cost-map n) ##Inf))) (map (fn [[n d]] [n (+ d cost)]) ns))
+              updated-cost-map (into cost-map to-update)
+              new-queue (into (pop queue) to-update)]
+          (recur new-queue updated-cost-map))))))
