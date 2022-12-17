@@ -8,7 +8,7 @@
         max-y (apply max (map second points))]
     (dotimes [y (inc max-y)]
       (dotimes [x (inc max-x)]
-        (print (if (points [x y]) "#" " ")))
+        (print (if (points [x (- max-y y)]) "#" ".")))
       (println))))
 
 (defn grid-size [grid]
