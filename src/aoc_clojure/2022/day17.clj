@@ -5,10 +5,6 @@
             [clojure.math.combinatorics :as combo]))
 (use 'clojure.java.io)
 
-(defn parse-line [line]
-  (let [[_ valve flow-rate valves] (first (re-seq #"Valve (\w+) has flow rate=(\d+); tunnels? leads? to valves? (.+)" line))]
-    [valve {:flow-rate (Integer/parseInt flow-rate) :valves (str/split valves #", ")}]))
-
 (defn parse-input [file-name]
   (as-> (slurp file-name) x
         (str/split x #"")
