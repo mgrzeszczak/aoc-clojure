@@ -126,8 +126,6 @@
     )
   )
 
-(not= 1 1)
-
 (defn create-move-fn-p2 [grid pos2tile-fn tile2pos-fn]
   (fn [current facing]
     (let [p (add-vec current (step facing))
